@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_dark"
+    tools:context=".ui.MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:background="#2f3640"
+        android:layout_height="?android:attr/actionBarSize">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/aldrich"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="Music Finder"
+            android:textColor="#f5f6fa"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/searchCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbar"
+        app:cardElevation="15dp"
+        android:outlineSpotShadowColor="@color/white"
+        android:outlineAmbientShadowColor="@color/white"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:gravity="center_vertical"
+            >
+
+            <EditText
+                android:id="@+id/query_edittext"
+                android:layout_marginStart="12dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.75"
+                android:layout_gravity="center_vertical"
+                android:gravity="left"
+                android:hint="Search"
+                android:maxLines="1"
+                android:background="@null"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/search_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_search"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
