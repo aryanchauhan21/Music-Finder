@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_dark"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.SearchActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -33,7 +33,7 @@
         android:id="@+id/searchCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,9 +81,32 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="5dp"
                 />
-
         </LinearLayout>
-
     </com.google.android.material.card.MaterialCardView>
+
+    <GridView
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/searchCard"
+        android:layout_marginTop="16dp"
+        android:padding="10dp"
+        android:gravity="center_horizontal"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchCard"
+        app:layout_constraintVertical_bias="0.4"
+        android:backgroundTint="@color/teal_700"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@ interface SongsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSongs(songs: List<Song>): List<Long>
 
-    @Query("SELECT * FROM songs WHERE artistName LIKE '%' || :artistName || '%'")
+    @Query("SELECT * FROM songs WHERE artistName LIKE :artistName")
     suspend fun getSongsByArtist(
         artistName: String
     ): List<Song>
