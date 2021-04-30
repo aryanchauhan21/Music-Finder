@@ -8,7 +8,9 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.musicfinder.R
 import com.example.musicfinder.api.RetrofitInstance
+import com.example.musicfinder.db.SongsDB
 import com.example.musicfinder.models.SearchResponse
+import com.example.musicfinder.repository.Repository
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -16,22 +18,31 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
-
+    private lateinit var repository: Repository
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val db = SongsDB.getDatabase(this)
+        repository = Repository(db)
+
         query_edittext.setOnEditorActionListener { v, actionId, event ->
             if(actionId == EditorInfo.IME_ACTION_SEARCH) {
-                // implement search
                 search()
             }
             false
         }
-
         search_icon.setOnClickListener {
-            search()
+            searchOffline()
             hideKeyboard()
+        }
+    }
+
+    private fun searchOffline() {
+        GlobalScope.launch { 
+            val songs = repository.searchForQueryOffline(query_edittext.text.toString())
+            Log.d(TAG, "searchOffline: ${songs.size} songs found")
         }
     }
 
@@ -40,13 +51,15 @@ class MainActivity : AppCompatActivity() {
         imm.hideSoftInputFromWindow(mainLayout.windowToken, 0)
     }
 
-
     private fun search() {
         GlobalScope.launch {
-            var response: Response<SearchResponse> = RetrofitInstance.api.searchForQuery(query_edittext.text.toString())
+            val response: Response<SearchResponse> = RetrofitInstance.api.searchForQuery(query_edittext.text.toString())
             if (response.isSuccessful) {
-                Log.d(TAG, "search: Response message = ${response.message()}")
-                Log.d(TAG, "search: Body = ${response.body()}")
+                Log.d(TAG, "search: Inserting into DB")
+                response.body()?.results?.let {
+                    Log.d(TAG, "search: Inserted into DB")
+                    repository.insertSongs(it)
+                }
             } else {
                 Log.d(TAG, "search: Something went wrong...")
             }

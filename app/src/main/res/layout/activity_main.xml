@@ -65,7 +65,7 @@
                 android:layout_weight="0.75"
                 android:layout_gravity="center_vertical"
                 android:gravity="left"
-                android:hint="Search"
+                android:hint="Artist Name"
                 android:maxLines="1"
                 android:background="@null"
                 android:imeOptions="actionSearch"
