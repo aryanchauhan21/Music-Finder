@@ -1,5 +1,5 @@
 # Music-Finder
-### Music finder is an Android app that hat connects to the iTunes connect API to retrieve songs for an Artist. 
+### Music finder is an Android app that connects to the iTunes connect API to retrieve songs for an Artist. 
 ### The iTunes API to connect to is https://itunes.apple.com/search?term=#searchTerm
 
 ### The App has following features/code_attributes :
